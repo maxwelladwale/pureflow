@@ -175,16 +175,22 @@ get_header(); ?>
         <div class="mb-20">
             <!-- Tab Navigation -->
             <div class="flex border-b border-slate-200 dark:border-slate-800 mb-8 overflow-x-auto">
-                <button class="product-tab px-8 py-4 text-sm font-bold border-b-2 border-primary text-primary whitespace-nowrap" data-tab="description">
+                <button
+                    class="product-tab px-8 py-4 text-sm font-bold border-b-2 border-primary text-primary whitespace-nowrap"
+                    data-tab="description">
                     Description
                 </button>
                 <?php if ($product->has_attributes() || $product->has_dimensions() || $product->has_weight()): ?>
-                    <button class="product-tab px-8 py-4 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary border-b-2 border-transparent whitespace-nowrap" data-tab="additional-info">
+                    <button
+                        class="product-tab px-8 py-4 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary border-b-2 border-transparent whitespace-nowrap"
+                        data-tab="additional-info">
                         Additional Information
                     </button>
                 <?php endif; ?>
                 <?php if (comments_open() || get_comments_number()): ?>
-                    <button class="product-tab px-8 py-4 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary border-b-2 border-transparent whitespace-nowrap" data-tab="reviews">
+                    <button
+                        class="product-tab px-8 py-4 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary border-b-2 border-transparent whitespace-nowrap"
+                        data-tab="reviews">
                         Reviews (<?php echo esc_html($review_count); ?>)
                     </button>
                 <?php endif; ?>
@@ -194,46 +200,47 @@ get_header(); ?>
             <div class="tab-content-wrapper">
                 <!-- Description Tab -->
                 <div id="description" class="tab-content active">
-                    <div class="prose prose-slate dark:prose-invert max-w-none prose-headings:tracking-tight prose-h3:text-xl prose-h3:font-bold prose-h3:mt-8 prose-h3:mb-4 prose-p:leading-relaxed prose-p:mb-4">
-                       <?php
-$content = apply_filters('the_content', $product_description);
+                    <div
+                        class="prose prose-slate dark:prose-invert max-w-none prose-headings:tracking-tight prose-h3:text-xl prose-h3:font-bold prose-h3:mt-8 prose-h3:mb-4 prose-p:leading-relaxed prose-p:mb-4">
+                        <?php
+                        $content = apply_filters('the_content', $product_description);
 
-// Style headings
-$content = preg_replace('/<h3([^>]*)>/', '<h3$1 class="text-xl font-bold mt-8 mb-4 tracking-tight text-slate-900 dark:text-white">', $content);
+                        // Style headings
+                        $content = preg_replace('/<h3([^>]*)>/', '<h3$1 class="text-xl font-bold mt-8 mb-4 tracking-tight text-slate-900 dark:text-white">', $content);
 
-// Style tables to match Additional Information table
-$content = preg_replace('/<table([^>]*)>/', '<div class="not-prose overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800 my-8"><table$1 class="w-full text-sm text-left">', $content);
-$content = preg_replace('/<\/table>/', '</table></div>', $content);
+                        // Style tables to match Additional Information table
+                        $content = preg_replace('/<table([^>]*)>/', '<div class="not-prose overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800 my-8"><table$1 class="w-full text-sm text-left">', $content);
+                        $content = preg_replace('/<\/table>/', '</table></div>', $content);
 
-// Style tbody
-$content = preg_replace('/<tbody([^>]*)>/', '<tbody$1 class="divide-y divide-slate-100 dark:divide-slate-800">', $content);
+                        // Style tbody
+                        $content = preg_replace('/<tbody([^>]*)>/', '<tbody$1 class="divide-y divide-slate-100 dark:divide-slate-800">', $content);
 
-// Style table rows - alternate background colors
-$content = preg_replace_callback(
-    '/<tr([^>]*)>/i',
-    function($matches) {
-        static $counter = 0;
-        $counter++;
-        $bg_class = ($counter % 2 == 1) ? 'bg-slate-50 dark:bg-slate-900/50' : '';
-        return '<tr class="' . $bg_class . '"' . $matches[1] . '>';
-    },
-    $content
-);
+                        // Style table rows - alternate background colors
+                        $content = preg_replace_callback(
+                            '/<tr([^>]*)>/i',
+                            function ($matches) {
+                                static $counter = 0;
+                                $counter++;
+                                $bg_class = ($counter % 2 == 1) ? 'bg-slate-50 dark:bg-slate-900/50' : '';
+                                return '<tr class="' . $bg_class . '"' . $matches[1] . '>';
+                            },
+                            $content
+                        );
 
-// Style table cells (td and th)
-$content = preg_replace('/<td([^>]*)>/', '<td$1 class="px-4 py-3 text-slate-600 dark:text-slate-400">', $content);
-$content = preg_replace('/<th([^>]*)>/', '<th$1 class="px-4 py-3 font-semibold text-slate-600 dark:text-slate-300 italic">', $content);
+                        // Style table cells (td and th)
+                        $content = preg_replace('/<td([^>]*)>/', '<td$1 class="px-4 py-3 text-slate-600 dark:text-slate-400">', $content);
+                        $content = preg_replace('/<th([^>]*)>/', '<th$1 class="px-4 py-3 font-semibold text-slate-600 dark:text-slate-300 italic">', $content);
 
-// Style strong tags in tables
-$content = preg_replace('/<strong>/', '<span class="font-semibold text-slate-700 dark:text-slate-300">', $content);
-$content = preg_replace('/<\/strong>/', '</span>', $content);
+                        // Style strong tags in tables
+                        $content = preg_replace('/<strong>/', '<span class="font-semibold text-slate-700 dark:text-slate-300">', $content);
+                        $content = preg_replace('/<\/strong>/', '</span>', $content);
 
-// Style lists
-$content = preg_replace('/<ul([^>]*)>/', '<ul$1 class="list-disc pl-5 space-y-2 mb-8 text-slate-700 dark:text-slate-300">', $content);
-$content = preg_replace('/<li([^>]*)>/', '<li$1 class="leading-relaxed">', $content);
+                        // Style lists
+                        $content = preg_replace('/<ul([^>]*)>/', '<ul$1 class="list-disc pl-5 space-y-2 mb-8 text-slate-700 dark:text-slate-300">', $content);
+                        $content = preg_replace('/<li([^>]*)>/', '<li$1 class="leading-relaxed">', $content);
 
-echo $content;
-?>
+                        echo $content;
+                        ?>
                     </div>
                 </div>
 
@@ -274,7 +281,8 @@ echo $content;
                                     if ($product->has_weight()):
                                         ?>
                                         <tr class="<?php echo $row_class ? 'bg-slate-50 dark:bg-slate-900/50' : ''; ?>">
-                                            <th class="px-4 py-3 font-semibold text-slate-600 dark:text-slate-300 italic">Weight</th>
+                                            <th class="px-4 py-3 font-semibold text-slate-600 dark:text-slate-300 italic">Weight
+                                            </th>
                                             <td class="px-4 py-3 text-slate-600 dark:text-slate-400">
                                                 <?php echo esc_html($product->get_weight() . ' ' . get_option('woocommerce_weight_unit')); ?>
                                             </td>
@@ -286,7 +294,8 @@ echo $content;
                                     if ($product->has_dimensions()):
                                         ?>
                                         <tr class="<?php echo $row_class ? 'bg-slate-50 dark:bg-slate-900/50' : ''; ?>">
-                                            <th class="px-4 py-3 font-semibold text-slate-600 dark:text-slate-300 italic">Dimensions</th>
+                                            <th class="px-4 py-3 font-semibold text-slate-600 dark:text-slate-300 italic">Dimensions
+                                            </th>
                                             <td class="px-4 py-3 text-slate-600 dark:text-slate-400">
                                                 <?php echo esc_html(wc_format_dimensions($product->get_dimensions(false))); ?>
                                             </td>
@@ -312,12 +321,12 @@ echo $content;
         </div>
 
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 const tabs = document.querySelectorAll('.product-tab');
                 const contents = document.querySelectorAll('.tab-content');
 
                 tabs.forEach(tab => {
-                    tab.addEventListener('click', function() {
+                    tab.addEventListener('click', function () {
                         const targetTab = this.getAttribute('data-tab');
 
                         // Remove active states
