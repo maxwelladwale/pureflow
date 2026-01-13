@@ -91,7 +91,7 @@ get_header(); ?>
         <div
             class="lg:w-1/4 flex flex-col justify-between p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg">
             <div class="flex flex-col">
-                <h1 class="text-2xl font-bold text-slate-900 dark:text-white mb-2 leading-tight">
+                <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-4 leading-tight tracking-tight">
                     <?php echo esc_html($product_name); ?>
                 </h1>
 
@@ -122,7 +122,7 @@ get_header(); ?>
 
                 <!-- Price -->
                 <div class="mb-6">
-                    <div class="text-3xl font-bold text-slate-900 dark:text-white">
+                    <div class="text-2xl font-bold text-slate-900 dark:text-white">
                         <?php echo $product_price; ?>
                     </div>
                 </div>
@@ -173,9 +173,10 @@ get_header(); ?>
     <!-- Product Details Tabs -->
     <div class="max-w-[1280px] mx-auto w-full px-6 py-8">
         <section class="mb-16">
-            <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">Description</h2>
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">Description</h2>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                <div class="lg:col-span-2 prose prose-slate dark:prose-invert max-w-none">
+                <div
+                    class="lg:col-span-2 prose prose-slate dark:prose-invert max-w-none prose-headings:tracking-tight prose-h3:text-lg prose-h3:font-semibold prose-h3:mt-8 prose-h3:mb-4 prose-p:leading-relaxed">
                     <?php echo apply_filters('the_content', $product_description); ?>
                 </div>
             </div>
@@ -184,7 +185,7 @@ get_header(); ?>
         <!-- Additional Information -->
         <?php if ($product->has_attributes() || $product->has_dimensions() || $product->has_weight()): ?>
             <section class="mb-16">
-                <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">Additional Information</h2>
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">Additional Information</h2>
                 <div class="not-prose overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800">
                     <table class="w-full text-sm text-left">
                         <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
@@ -248,7 +249,7 @@ get_header(); ?>
         <!-- Reviews -->
         <?php if (comments_open() || get_comments_number()): ?>
             <section class="mb-16" id="reviews">
-                <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">Reviews
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">Reviews
                     (<?php echo esc_html($review_count); ?>)</h2>
                 <div class="prose prose-slate dark:prose-invert max-w-none">
                     <?php comments_template(); ?>
