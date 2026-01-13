@@ -172,90 +172,188 @@ get_header(); ?>
 
     <!-- Product Details Tabs -->
     <div class="max-w-[1280px] mx-auto w-full px-6 py-8">
-        <section class="mb-16">
-            <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">Description</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                <div
-                    class="lg:col-span-2 prose prose-slate dark:prose-invert max-w-none prose-headings:tracking-tight prose-h3:text-lg prose-h3:font-semibold prose-h3:mt-8 prose-h3:mb-4 prose-p:leading-relaxed">
-                    <?php echo apply_filters('the_content', $product_description); ?>
-                </div>
+        <div class="mb-20">
+            <!-- Tab Navigation -->
+            <div class="flex border-b border-slate-200 dark:border-slate-800 mb-8 overflow-x-auto">
+                <button class="product-tab px-8 py-4 text-sm font-bold border-b-2 border-primary text-primary whitespace-nowrap" data-tab="description">
+                    Description
+                </button>
+                <?php if ($product->has_attributes() || $product->has_dimensions() || $product->has_weight()): ?>
+                    <button class="product-tab px-8 py-4 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary border-b-2 border-transparent whitespace-nowrap" data-tab="additional-info">
+                        Additional Information
+                    </button>
+                <?php endif; ?>
+                <?php if (comments_open() || get_comments_number()): ?>
+                    <button class="product-tab px-8 py-4 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary border-b-2 border-transparent whitespace-nowrap" data-tab="reviews">
+                        Reviews (<?php echo esc_html($review_count); ?>)
+                    </button>
+                <?php endif; ?>
             </div>
-        </section>
 
-        <!-- Additional Information -->
-        <?php if ($product->has_attributes() || $product->has_dimensions() || $product->has_weight()): ?>
-            <section class="mb-16">
-                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">Additional Information</h2>
-                <div class="not-prose overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800">
-                    <table class="w-full text-sm text-left">
-                        <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
-                            <?php
-                            $attributes = $product->get_attributes();
-                            $row_class = true;
+            <!-- Tab Content -->
+            <div class="tab-content-wrapper">
+                <!-- Description Tab -->
+                <div id="description" class="tab-content active">
+                    <div class="prose prose-slate dark:prose-invert max-w-none prose-headings:tracking-tight prose-h3:text-xl prose-h3:font-bold prose-h3:mt-8 prose-h3:mb-4 prose-p:leading-relaxed prose-p:mb-4">
+                       <?php
+$content = apply_filters('the_content', $product_description);
 
-                            foreach ($attributes as $attribute):
-                                if (!$attribute->get_visible())
-                                    continue;
-                                ?>
-                                <tr class="<?php echo $row_class ? 'bg-slate-50 dark:bg-slate-900/50' : ''; ?>">
-                                    <th class="px-4 py-3 font-semibold text-slate-600 dark:text-slate-300 w-1/3 italic">
-                                        <?php echo wc_attribute_label($attribute->get_name()); ?>
-                                    </th>
-                                    <td class="px-4 py-3 text-slate-600 dark:text-slate-400">
-                                        <?php
-                                        if ($attribute->is_taxonomy()) {
-                                            $values = wc_get_product_terms($product_id, $attribute->get_name(), array('fields' => 'names'));
-                                            echo esc_html(implode(', ', $values));
-                                        } else {
-                                            echo esc_html(implode(', ', $attribute->get_options()));
-                                        }
+// Style headings
+$content = preg_replace('/<h3([^>]*)>/', '<h3$1 class="text-xl font-bold mt-8 mb-4 tracking-tight text-slate-900 dark:text-white">', $content);
+
+// Style tables to match Additional Information table
+$content = preg_replace('/<table([^>]*)>/', '<div class="not-prose overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800 my-8"><table$1 class="w-full text-sm text-left">', $content);
+$content = preg_replace('/<\/table>/', '</table></div>', $content);
+
+// Style tbody
+$content = preg_replace('/<tbody([^>]*)>/', '<tbody$1 class="divide-y divide-slate-100 dark:divide-slate-800">', $content);
+
+// Style table rows - alternate background colors
+$content = preg_replace_callback(
+    '/<tr([^>]*)>/i',
+    function($matches) {
+        static $counter = 0;
+        $counter++;
+        $bg_class = ($counter % 2 == 1) ? 'bg-slate-50 dark:bg-slate-900/50' : '';
+        return '<tr class="' . $bg_class . '"' . $matches[1] . '>';
+    },
+    $content
+);
+
+// Style table cells (td and th)
+$content = preg_replace('/<td([^>]*)>/', '<td$1 class="px-4 py-3 text-slate-600 dark:text-slate-400">', $content);
+$content = preg_replace('/<th([^>]*)>/', '<th$1 class="px-4 py-3 font-semibold text-slate-600 dark:text-slate-300 italic">', $content);
+
+// Style strong tags in tables
+$content = preg_replace('/<strong>/', '<span class="font-semibold text-slate-700 dark:text-slate-300">', $content);
+$content = preg_replace('/<\/strong>/', '</span>', $content);
+
+// Style lists
+$content = preg_replace('/<ul([^>]*)>/', '<ul$1 class="list-disc pl-5 space-y-2 mb-8 text-slate-700 dark:text-slate-300">', $content);
+$content = preg_replace('/<li([^>]*)>/', '<li$1 class="leading-relaxed">', $content);
+
+echo $content;
+?>
+                    </div>
+                </div>
+
+                <!-- Additional Information Tab -->
+                <?php if ($product->has_attributes() || $product->has_dimensions() || $product->has_weight()): ?>
+                    <div id="additional-info" class="tab-content hidden">
+                        <div class="not-prose overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800">
+                            <table class="w-full text-sm text-left">
+                                <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                                    <?php
+                                    $attributes = $product->get_attributes();
+                                    $row_class = true;
+
+                                    foreach ($attributes as $attribute):
+                                        if (!$attribute->get_visible())
+                                            continue;
                                         ?>
-                                    </td>
-                                </tr>
-                                <?php
-                                $row_class = !$row_class;
-                            endforeach;
+                                        <tr class="<?php echo $row_class ? 'bg-slate-50 dark:bg-slate-900/50' : ''; ?>">
+                                            <th class="px-4 py-3 font-semibold text-slate-600 dark:text-slate-300 w-1/3 italic">
+                                                <?php echo wc_attribute_label($attribute->get_name()); ?>
+                                            </th>
+                                            <td class="px-4 py-3 text-slate-600 dark:text-slate-400">
+                                                <?php
+                                                if ($attribute->is_taxonomy()) {
+                                                    $values = wc_get_product_terms($product_id, $attribute->get_name(), array('fields' => 'names'));
+                                                    echo esc_html(implode(', ', $values));
+                                                } else {
+                                                    echo esc_html(implode(', ', $attribute->get_options()));
+                                                }
+                                                ?>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                        $row_class = !$row_class;
+                                    endforeach;
 
-                            // Add weight and dimensions if available
-                            if ($product->has_weight()):
-                                ?>
-                                <tr class="<?php echo $row_class ? 'bg-slate-50 dark:bg-slate-900/50' : ''; ?>">
-                                    <th class="px-4 py-3 font-semibold text-slate-600 dark:text-slate-300 italic">Weight</th>
-                                    <td class="px-4 py-3 text-slate-600 dark:text-slate-400">
-                                        <?php echo esc_html($product->get_weight() . ' ' . get_option('woocommerce_weight_unit')); ?>
-                                    </td>
-                                </tr>
-                                <?php
-                                $row_class = !$row_class;
-                            endif;
+                                    // Add weight and dimensions if available
+                                    if ($product->has_weight()):
+                                        ?>
+                                        <tr class="<?php echo $row_class ? 'bg-slate-50 dark:bg-slate-900/50' : ''; ?>">
+                                            <th class="px-4 py-3 font-semibold text-slate-600 dark:text-slate-300 italic">Weight</th>
+                                            <td class="px-4 py-3 text-slate-600 dark:text-slate-400">
+                                                <?php echo esc_html($product->get_weight() . ' ' . get_option('woocommerce_weight_unit')); ?>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                        $row_class = !$row_class;
+                                    endif;
 
-                            if ($product->has_dimensions()):
-                                ?>
-                                <tr class="<?php echo $row_class ? 'bg-slate-50 dark:bg-slate-900/50' : ''; ?>">
-                                    <th class="px-4 py-3 font-semibold text-slate-600 dark:text-slate-300 italic">Dimensions</th>
-                                    <td class="px-4 py-3 text-slate-600 dark:text-slate-400">
-                                        <?php echo esc_html(wc_format_dimensions($product->get_dimensions(false))); ?>
-                                    </td>
-                                </tr>
-                                <?php
-                            endif;
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-        <?php endif; ?>
+                                    if ($product->has_dimensions()):
+                                        ?>
+                                        <tr class="<?php echo $row_class ? 'bg-slate-50 dark:bg-slate-900/50' : ''; ?>">
+                                            <th class="px-4 py-3 font-semibold text-slate-600 dark:text-slate-300 italic">Dimensions</th>
+                                            <td class="px-4 py-3 text-slate-600 dark:text-slate-400">
+                                                <?php echo esc_html(wc_format_dimensions($product->get_dimensions(false))); ?>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    endif;
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <?php endif; ?>
 
-        <!-- Reviews -->
-        <?php if (comments_open() || get_comments_number()): ?>
-            <section class="mb-16" id="reviews">
-                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">Reviews
-                    (<?php echo esc_html($review_count); ?>)</h2>
-                <div class="prose prose-slate dark:prose-invert max-w-none">
-                    <?php comments_template(); ?>
-                </div>
-            </section>
-        <?php endif; ?>
+                <!-- Reviews Tab -->
+                <?php if (comments_open() || get_comments_number()): ?>
+                    <div id="reviews" class="tab-content hidden">
+                        <div class="prose prose-slate dark:prose-invert max-w-none">
+                            <?php comments_template(); ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const tabs = document.querySelectorAll('.product-tab');
+                const contents = document.querySelectorAll('.tab-content');
+
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', function() {
+                        const targetTab = this.getAttribute('data-tab');
+
+                        // Remove active states
+                        tabs.forEach(t => {
+                            t.classList.remove('border-primary', 'text-primary', 'font-bold');
+                            t.classList.add('border-transparent', 'text-slate-500', 'dark:text-slate-400', 'font-medium');
+                        });
+
+                        contents.forEach(c => {
+                            c.classList.add('hidden');
+                            c.classList.remove('active');
+                        });
+
+                        // Add active state to clicked tab
+                        this.classList.add('border-primary', 'text-primary', 'font-bold');
+                        this.classList.remove('border-transparent', 'text-slate-500', 'dark:text-slate-400', 'font-medium');
+
+                        // Show corresponding content
+                        const targetContent = document.getElementById(targetTab);
+                        if (targetContent) {
+                            targetContent.classList.remove('hidden');
+                            targetContent.classList.add('active');
+                        }
+                    });
+                });
+
+                // Handle hash navigation (e.g., #reviews link from rating)
+                if (window.location.hash) {
+                    const hash = window.location.hash.substring(1);
+                    const matchingTab = document.querySelector(`[data-tab="${hash}"]`);
+                    if (matchingTab) {
+                        matchingTab.click();
+                    }
+                }
+            });
+        </script>
 
         <!-- Related Products -->
         <?php
