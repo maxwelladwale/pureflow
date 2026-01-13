@@ -1,0 +1,45 @@
+/*
+Theme Name: PureFlow Water Parts
+Theme URI: https://yoursite.com
+Author: Your Name
+Author URI: https://yoursite.com
+Description: Custom WooCommerce theme for water treatment machinery parts
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.4
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: pureflow
+Tags: e-commerce, woocommerce, custom-theme
+
+This theme, like WordPress, is licensed under the GPL.
+*/
+
+/* Base styles will be handled by Tailwind CSS */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Override WooCommerce default grid styles */
+.woocommerce ul.products {
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+.woocommerce ul.products li.product {
+    width: auto !important;
+    float: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.woocommerce ul.products::before,
+.woocommerce ul.products::after {
+    display: none !important;
+}

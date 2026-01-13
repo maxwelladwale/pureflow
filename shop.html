@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Parts Shop Listing Page - PureFlow Water Parts</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between gap-8">
+<div class="flex items-center gap-8 shrink-0">
+<div class="flex items-center gap-2">
+<div class="bg-primary text-white p-1 rounded">
+<span class="material-symbols-outlined block">water_drop</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">PureFlow</h1>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium text-primary" href="#">Shop</a>
+<a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary" href="#">Resources</a>
+<a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary" href="#">Support</a>
+</nav>
+</div>
+<div class="flex-1 max-w-xl">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-lg py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/50 placeholder:text-slate-400" placeholder="Search by SKU, part name, or technical spec..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4 shrink-0">
+<button class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg relative">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-1 right-1 w-4 h-4 bg-primary text-white text-[10px] flex items-center justify-center rounded-full">3</span>
+</button>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-700"></div>
+<div class="flex items-center gap-3">
+<div class="bg-slate-200 dark:bg-slate-700 h-8 w-8 rounded-full overflow-hidden" data-alt="User profile avatar placeholder">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_HFGj0PzcaC8-aXeux6JTD3uv8w5Xl77sSBOLLGr5rEuSHrR2lYuG34CN0xBWcxCV8YoDB1Mb1oG0Crbblj4rJN8j9mT16EN27e-6kczu5SphqfehegcWpH3I4j2Uh2chd_Ag9fUsXOoR9PH8iZjza-cysrmg1NVN15TuCvI3E4ZhrUBYNUU4PjM1zfJSRVATCq3QAxYWdkV17iaefBSYOJLJsyWpubylts1KqW-42Itjno7dEu3VDKZk-3lxWM4vT3r_VqdmCul2"/>
+</div>
+<span class="hidden lg:block text-sm font-semibold">Account</span>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto px-6 py-6">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-6">
+<a class="hover:text-primary" href="#">Home</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<a class="hover:text-primary" href="#">Shop</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-slate-900 dark:text-white font-medium">UV Sterilizers</span>
+</nav>
+<div class="flex gap-8">
+<!-- Sidebar Filters -->
+<aside class="w-64 shrink-0 hidden lg:block">
+<div class="flex flex-col gap-8">
+<!-- Categories -->
+<div>
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-4">Categories</h3>
+<div class="flex flex-col gap-1">
+<a class="flex items-center justify-between px-3 py-2 rounded-lg bg-primary/10 text-primary font-medium" href="#">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">wb_iridescent</span> UV Sterilizers</span>
+<span class="text-xs">142</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400" href="#">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">build</span> Fittings</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400" href="#">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">valve</span> Valves</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400" href="#">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">waves</span> Membranes</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400" href="#">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">settings</span> Pumps</span>
+</a>
+</div>
+</div>
+<!-- Price Filter -->
+<div>
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-4">Price Range</h3>
+<div class="px-2">
+<div class="h-1 w-full bg-slate-200 dark:bg-slate-700 rounded-full relative mb-4">
+<div class="absolute left-1/4 right-1/4 h-full bg-primary rounded-full"></div>
+<div class="absolute left-1/4 top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-white border-2 border-primary rounded-full cursor-pointer"></div>
+<div class="absolute right-1/4 top-1/2 -translate-y-1/2 translate-x-1/2 w-4 h-4 bg-white border-2 border-primary rounded-full cursor-pointer"></div>
+</div>
+<div class="flex items-center gap-2">
+<input class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded p-1.5 text-xs text-center" type="text" value="$50"/>
+<span class="text-slate-400">-</span>
+<input class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded p-1.5 text-xs text-center" type="text" value="$2500"/>
+</div>
+</div>
+</div>
+<!-- Brand Filter -->
+<div>
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-4">Brand</h3>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-400">Viqua</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-400">Pura</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-400">Luminor</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-400">Trojan Technologies</span>
+</label>
+</div>
+</div>
+<!-- Specs Filter -->
+<div>
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-4">Flow Rate (GPM)</h3>
+<div class="grid grid-cols-2 gap-2">
+<button class="px-2 py-1.5 text-xs font-medium border border-slate-200 dark:border-slate-700 rounded-lg hover:border-primary transition-colors">1-5 GPM</button>
+<button class="px-2 py-1.5 text-xs font-medium border border-slate-200 dark:border-slate-700 rounded-lg hover:border-primary transition-colors">6-12 GPM</button>
+<button class="px-2 py-1.5 text-xs font-medium border border-slate-200 dark:border-slate-700 rounded-lg hover:border-primary transition-colors">13-20 GPM</button>
+<button class="px-2 py-1.5 text-xs font-medium border border-slate-200 dark:border-slate-700 rounded-lg hover:border-primary transition-colors">21+ GPM</button>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Listing Area -->
+<div class="flex-1">
+<!-- Toolbar -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+<div>
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-1">UV Sterilizers</h2>
+<p class="text-sm text-slate-500 dark:text-slate-400">Showing 1-12 of 142 results</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="text-sm text-slate-500">Sort by:</span>
+<select class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-1.5 pl-3 pr-8 focus:ring-primary cursor-pointer">
+<option>Newest Arrivals</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+<option>Flow Rate: High to Low</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Active Filter Tags -->
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full">
+                        Brand: Viqua
+                        <button class="material-symbols-outlined text-xs">close</button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-semibold rounded-full">
+                        Category: UV Sterilizers
+                        <button class="material-symbols-outlined text-xs">close</button>
+</span>
+<button class="text-xs text-primary font-medium hover:underline">Clear all</button>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Product Card 1 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col group transition-all hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-none">
+<div class="relative aspect-square p-6 flex items-center justify-center bg-white">
+<img alt="Viqua S2Q-PA" class="max-h-full object-contain mix-blend-multiply" data-alt="Technical UV sterilization system in metallic enclosure" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAifHPguXtAMvxaS4cu6wbRhhGCxrgXwH0cYhVH0jcH4Z-E6DA5SMOWKa9eU9RnZ1KW_I8RDudz8GCZvCElA7HMadVrclDtIYY4kZfapffQWt5y1cRal5_5lxFcXg0IwZDrGNLkYG1f4bYZsrgWKI3Fkc4PG8JB2XEH0N5gbexPpzVmVslRO7EdrLyNkU6TpuN-pepRyhtFvENpTPBn_LnoADzUqlR2PHR94YO4gJ7IRMbae9RpaVezs5uvEHVe-KlOCePZkkxemjdn"/>
+<span class="absolute top-4 left-4 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">IN STOCK</span>
+<button class="absolute top-4 right-4 p-2 bg-white/80 backdrop-blur shadow-sm rounded-full text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-sm">favorite</span>
+</button>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="mb-1">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Viqua</span>
+<h3 class="font-bold text-slate-900 dark:text-white leading-tight group-hover:text-primary transition-colors">S2Q-PA Sterilight Silver Series</h3>
+<p class="text-[11px] font-mono text-slate-500 mt-1">SKU: VIQ-1283-A</p>
+</div>
+<div class="my-4 space-y-2">
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500">Flow Rate</span>
+<span class="font-semibold">3 GPM</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500">Connection</span>
+<span class="font-semibold">1/2" MNPT</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500">Voltage</span>
+<span class="font-semibold">100-240V</span>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-xs text-slate-500 line-through">$420.00</span>
+<span class="text-xl font-bold text-slate-900 dark:text-white">$385.99</span>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white p-2.5 rounded-lg transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col group transition-all hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-none">
+<div class="relative aspect-square p-6 flex items-center justify-center bg-white">
+<img alt="Viqua VP600" class="max-h-full object-contain mix-blend-multiply" data-alt="High performance professional water treatment filter component" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHsPVuOBkuH4WAnAV6iBpbTNjwom4ahABicvkypzs_7c5Nn-cO45pCHf23SExDpHxwWofneYNnJ0cic0xeG-PbWF5QNLnIwskTsTKhljZV5yB-BxB30v4v17dGhcpNCT4tEWPIsM00dNfEH0WlqDsgizkwmcjpKBa9oXBNE-fftVSYt1KcXXhfE4ZfzSNcf4oEh0vXs9oyAE4TBM9uGATpXFm6On-XZYBhH6u54HrlKyfqhedlgNFAU9rre388pPx0UrsOa6xN8ZAD"/>
+<span class="absolute top-4 left-4 bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">2-4 DAY LEAD</span>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="mb-1">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Viqua</span>
+<h3 class="font-bold text-slate-900 dark:text-white leading-tight group-hover:text-primary transition-colors">VP600 Professional High-Flow System</h3>
+<p class="text-[11px] font-mono text-slate-500 mt-1">SKU: VIQ-VP600-P</p>
+</div>
+<div class="my-4 space-y-2">
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500">Flow Rate</span>
+<span class="font-semibold">22 GPM</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500">Connection</span>
+<span class="font-semibold">1" MNPT</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500">Max Pressure</span>
+<span class="font-semibold">125 PSI</span>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-xl font-bold text-slate-900 dark:text-white">$1,149.00</span>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition-colors flex items-center gap-2 font-bold text-sm">
+                                    Add to Cart
+                                </button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col group transition-all hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-none">
+<div class="relative aspect-square p-6 flex items-center justify-center bg-white">
+<img alt="Viqua D4" class="max-h-full object-contain mix-blend-multiply" data-alt="Stainless steel residential water disinfection unit" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8zT_Zi_TsHFUkEnN2lDz-Cyfmmv0N5J4v8IOsdXFK3yfFRHyscCxJ-tnez4-wPU9sQeYEjjT_2ipGbsi1-n7zV7HhVGsvMbEwlmYxCdKL6d29xPy6Lc-dPr8TW3s99lMfdZsTJQSbUkYoDMY2oSl9j7bpVl1IbU5FIh0jj03IJ_OvzRiIWCpssyzVcGJ_xADVlTjZk-iZLF34qi74qhvkzUl8d2fz4n7jJn5D8UHLTeKl3LNTsqn-_U8Wi-VBwBYuKoCJuwu20uSj"/>
+<span class="absolute top-4 left-4 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">IN STOCK</span>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="mb-1">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Viqua</span>
+<h3 class="font-bold text-slate-900 dark:text-white leading-tight group-hover:text-primary transition-colors">D4 Home Series UV Disinfection</h3>
+<p class="text-[11px] font-mono text-slate-500 mt-1">SKU: VIQ-D4-BASE</p>
+</div>
+<div class="my-4 space-y-2">
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500">Flow Rate</span>
+<span class="font-semibold">12 GPM</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500">Connection</span>
+<span class="font-semibold">3/4" MNPT</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500">Warranty</span>
+<span class="font-semibold">10-Year (Chamber)</span>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-xl font-bold text-slate-900 dark:text-white">$658.00</span>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white p-2.5 rounded-lg transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 (Repeated pattern for grid fill) -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col group transition-all hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-none">
+<div class="relative aspect-square p-6 flex items-center justify-center bg-white">
+<img alt="Viqua Ballast" class="max-h-full object-contain mix-blend-multiply" data-alt="Electronic ballast controller for UV water treatment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDy8W1U9Wo9hyX0w9qcc08QWDuy-8cAxyQvGr5PutxlaErGozo4XiZGVz84PlqXcV_nLQGen9AtGmSsGA4KhN8szkT10WcybfEUZAXLQM_YjUcetOh5MZWxaTMhwze5uOAqACHf6vsHIAE9fK1yI2l0BrsSPoDMwAova8m4wC5Hx4VV1zxWSb5vF9hsPQYEAhZfc36CYYojAJOEwovRFa5JoBe6gT2SZ7jnaGc4eJgGRYupjX2zpcBnVzyY8fUIg7nHKxjqED_Hdbbc"/>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="mb-1">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Parts</span>
+<h3 class="font-bold text-slate-900 dark:text-white leading-tight group-hover:text-primary transition-colors">Replacement Ballast Controller</h3>
+<p class="text-[11px] font-mono text-slate-500 mt-1">SKU: BA-ICE-S</p>
+</div>
+<div class="my-4 space-y-2">
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500">Compatibility</span>
+<span class="font-semibold">Silver Series</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500">Type</span>
+<span class="font-semibold">Electronic</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500">Indicator</span>
+<span class="font-semibold">LED / Audible</span>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-xl font-bold text-slate-900 dark:text-white">$192.50</span>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white p-2.5 rounded-lg transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col group transition-all hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-none">
+<div class="relative aspect-square p-6 flex items-center justify-center bg-white">
+<img alt="Replacement Lamp" class="max-h-full object-contain mix-blend-multiply" data-alt="Long-lasting germicidal ultraviolet replacement lamp" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9b2UucF_yB4M5ALZU7iQ9JLPEpw_ryUeCvTYxKZwdf-junvS6OqqiEmJmsBd9EeB6UB96KWS-HuK9g1tuAmt3gYztR8lQi3KQsQFnTSG05NjOQT3BlTBSLtVew_hec2Z3AKu7PtsCv0zVcmoK8nV8XX2Ay22N_TN8-Yq8KvGp6vs1KgpiH8mSxb9noWI0dWpEMZMcauScyJjatjU0ylCbOZcFUiVQGuxFoy1T17sLpSWQexVJtUc8XqvDXqGGpNb6KCPpZa7qq5fK"/>
+<span class="absolute top-4 left-4 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">IN STOCK</span>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="mb-1">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Maintenance</span>
+<h3 class="font-bold text-slate-900 dark:text-white leading-tight group-hover:text-primary transition-colors">S463RL Quartz UV Lamp</h3>
+<p class="text-[11px] font-mono text-slate-500 mt-1">SKU: LMP-463-QL</p>
+</div>
+<div class="my-4 space-y-2">
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500">Life Span</span>
+<span class="font-semibold">9,000 Hours</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500">Wavelength</span>
+<span class="font-semibold">254 nm</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500">Base Color</span>
+<span class="font-semibold">Green</span>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-xl font-bold text-slate-900 dark:text-white">$89.00</span>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white p-2.5 rounded-lg transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 6 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col group transition-all hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-none">
+<div class="relative aspect-square p-6 flex items-center justify-center bg-white">
+<img alt="Quartz Sleeve" class="max-h-full object-contain mix-blend-multiply" data-alt="High purity clear quartz sleeve for UV lamp protection" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjExx8rSAAbw6jnzSCHDce_m-O4WKQgOTcVFm-ubC1IREl_b28XnsuPIymRpIJVjLOVydudemtVIGXTihQ1Cm9Jvr9SF4A-N0hPk8ATBP_4BtZvGA_pwtX-cUTYNUlqRUZUjEr5gO2GamHvwf-vt-U9fE47C2uEvFovF2BRXoTKZh--psKpOaXKDyHEsitG7pizvRu6RvWHBlPeULPT1kh8IzOJnGYeDTR2LcIbho5By6QQ4xrzGGxHZTlRy31Ef1rvgSBP7PGQVWU"/>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="mb-1">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Maintenance</span>
+<h3 class="font-bold text-slate-900 dark:text-white leading-tight group-hover:text-primary transition-colors">QS-463 Open-Ended Quartz Sleeve</h3>
+<p class="text-[11px] font-mono text-slate-500 mt-1">SKU: QRTZ-SLV-463</p>
+</div>
+<div class="my-4 space-y-2">
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500">Material</span>
+<span class="font-semibold">Fused Silica</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500">Transmittance</span>
+<span class="font-semibold">&gt; 90%</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500">End Type</span>
+<span class="font-semibold">Domed / Open</span>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-xl font-bold text-slate-900 dark:text-white">$54.25</span>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white p-2.5 rounded-lg transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-12 flex items-center justify-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800">3</button>
+<span class="px-2 text-slate-400">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800">12</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Area (Brief) -->
+<footer class="mt-20 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-12">
+<div class="max-w-[1440px] mx-auto px-6 flex flex-col md:flex-row justify-between gap-8">
+<div class="max-w-xs">
+<div class="flex items-center gap-2 mb-4">
+<div class="bg-primary text-white p-1 rounded">
+<span class="material-symbols-outlined block text-sm">water_drop</span>
+</div>
+<h2 class="text-lg font-bold tracking-tight text-slate-900 dark:text-white uppercase">PureFlow Water Parts</h2>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                    Premium industrial and residential water treatment components. Trusted by technicians worldwide.
+                </p>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-12">
+<div>
+<h4 class="font-bold text-sm mb-4">Support</h4>
+<ul class="text-sm space-y-2 text-slate-500">
+<li><a class="hover:text-primary" href="#">Help Center</a></li>
+<li><a class="hover:text-primary" href="#">Contact Us</a></li>
+<li><a class="hover:text-primary" href="#">Shipping Policy</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-4">Account</h4>
+<ul class="text-sm space-y-2 text-slate-500">
+<li><a class="hover:text-primary" href="#">My Orders</a></li>
+<li><a class="hover:text-primary" href="#">Wishlist</a></li>
+<li><a class="hover:text-primary" href="#">Tax Exempt Status</a></li>
+</ul>
+</div>
+<div class="col-span-2 sm:col-span-1">
+<h4 class="font-bold text-sm mb-4">Newsletter</h4>
+<div class="flex gap-2">
+<input class="bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm px-3 py-2 w-full" placeholder="Email address" type="email"/>
+<button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold">Join</button>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-[1440px] mx-auto px-6 mt-12 pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-slate-400 font-medium">
+<p>© 2024 PureFlow Water Parts. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+<a class="hover:text-primary" href="#">Terms of Service</a>
+<a class="hover:text-primary" href="#">Accessibility</a>
+</div>
+</div>
+</footer>
+</body></html>
