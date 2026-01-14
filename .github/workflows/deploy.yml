@@ -1,0 +1,37 @@
+name: 🚀 Deploy Website
+
+on:
+  repository_dispatch:
+    types: [deploy-production]
+
+jobs:
+  deploy:
+    name: Deploy via FTP
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚚 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 📋 Pre-Deployment Info
+        run: |
+          echo "🚀 Starting FTP deployment..."
+          echo "📦 Repository: ${{ github.repository }}"
+          echo "🌿 Branch: ${{ github.ref }}"
+          echo "📝 Commit: ${{ github.sha }}"
+          echo "🖥️  Server: ${{ secrets.FTP_SERVER }}"
+          echo "📁 Target Directory: ${{ secrets.FTP_SERVER_DIR }}"
+
+      - name: 📦 Deploy to Server
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+
+      - name: ✅ Deployment Complete
+        run: |
+          echo "✅ Deployment completed successfully!"
+          echo "📁 Files deployed to: ${{ secrets.FTP_SERVER_DIR }}"
+          echo "🎯 Server: ${{ secrets.FTP_SERVER }}"
